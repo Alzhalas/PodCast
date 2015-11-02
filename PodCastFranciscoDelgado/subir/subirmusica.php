@@ -1,32 +1,34 @@
 <?php
-//FUNCIONA CON MP3!!
+require '../clases/AutoCarga.php';
+$session = new Session();
 $MAX_SIZE = 50000000000;
 $tamano2 = $_FILES["archivo"]['size'];
 $tipo2 = $_FILES["archivo"]['type'];
-$archivo2 = $_FILES["archivo"]['name'];
+$archivo = $_FILES["archivo"]['name'];
 if ($_FILES['archivo']['size'] <= $MAX_SIZE) {
-    if ($_FILES['archivo']['name'] != NULL) {
-        $destino2 = "../musica/" . $archivo2;
-        if ($_FILES['archivo']['type'] == "audio/mpeg" or $_FILES['archivo']['type'] == "audio/mp3") {
-            move_uploaded_file($_FILES['archivo']['tmp_name'], $destino2);
-            echo "<span><br>El audio <b>" . $archivo2 . "</b> se ha subido correctamente</span> </br>";
-            require '../clases/AutoCarga.php';
-            $session = new Session();
-            $canciones = $session->get("canciones");
-            if ($canciones != null) {
-                foreach ($canciones as $key => $value) {
-                    echo "<p>$value</p>";
-                    echo "<p><a href='../control/phpadd.php?cancion=music1'>Music2</a></p>";
+    if ($_FILES['archivo']['name'] != NULL) 
+        {
+        $ubicacion = "../musica/" . $archivo;
+        if ($_FILES['archivo']['type'] == "audio/mvw" or $_FILES['archivo']['type'] == "audio/mp3") 
+            {
+            
+                move_uploaded_file($_FILES['archivo']['tmp_name'], $ubicacion);
+                echo "El archivo" . $archivo . "esta subido";
+            
+        
+            $cancionUser = $session->get("canciones");
+            if ($cancionUser != null) {
+                foreach ($cancionUser as $key => $value) {
+                    echo "<h2>$value</h2>";
+                    echo "<a href='../control/phpadd.php?cancion=music1'>Music2</a>";
                 }
             }
         } else {
-            echo "Error al subir el archivo " . $archivo2 . "<br><b>" . " El archivo no es un audio" . "</b>";
-            $contador = null;
+            echo "Error al subir el archivo " . $archivo . "<br><b>" . " El archivo no es un formato valido inserte mvw o mp3" . "</b>";
         }
     }
 } else {
-    echo "Error al subir el archivo " . $archivo2 . "<br><b>" . " El archivo es demasiado pesado" . "</b>";
-    $contador = null;
+    echo "Error al subir el archivo " . $archivo . " El archivo sobrepasa el peso" . "</b>";
 }
 ?>
 <!DOCTYPE html>
