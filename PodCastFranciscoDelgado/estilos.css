@@ -1,0 +1,23 @@
+body {
+    margin:0;
+    background-image:url("images/fondo.jpg"); 
+    background-repeat: no-repeat;
+}
+#logeando {
+    position: absolute;
+    margin-top:350px;
+    margin-left:730px;
+}
+label{
+    color:white;
+}
+#Blogin{
+    margin-left: 140px;
+    margin-top: 20px;   
+}
+h1 {
+    position: absolute;
+    top:-25px;
+    left:25px;
+    color:white;
+}
